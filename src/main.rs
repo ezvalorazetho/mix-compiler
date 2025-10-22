@@ -96,6 +96,8 @@ fn compile_program(dir: &str) -> Option<String> {
 
     println!("{:?}", nodes);
 
+    println!("COMPILE DONE");
+    
     None
 }
 

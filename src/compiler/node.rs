@@ -60,6 +60,11 @@ pub enum Node {
         obj: Box<Node>,
         loc: Location,
     },
+    CodeLockup {
+        targ: Box<Node>,
+        obj: Box<Node>,
+        loc: Location,
+    },
     FuncDef {
         name: String,
         public: bool,
@@ -72,6 +77,15 @@ pub enum Node {
         name: String,
         public: bool,
         child: Vec<Box<Node>>,
+        body: Vec<Box<Node>>,
+        loc: Location,
+    },
+    Attach {
+        name: String,
+        attach_to: Box<Node>,
+        public: bool,
+        args: Vec<Box<Node>>,
+        rtype: Box<Node>,
         body: Vec<Box<Node>>,
         loc: Location,
     },
@@ -92,6 +106,7 @@ pub enum Node {
     LetDef {
         name: String,
         dtype: Box<Node>,
+        public: bool,
         value: Box<Node>,
         loc: Location,
     },
@@ -119,8 +134,8 @@ pub enum Node {
         loc: Location,
     },
     ForLoop {
-        initializer: Vec<Box<Node>>,
-        iterator: Vec<Box<Node>>,
+        initializer: Box<Node>,
+        iterator: Box<Node>,
         body: Vec<Box<Node>>,
         loc: Location,
     },
@@ -129,14 +144,20 @@ pub enum Node {
         body: Vec<Box<Node>>,
         loc: Location,
     },
-    Match {
+    MatchCase {
         value: Box<Node>,
-        child: Vec<Box<(Node, Node)>>,
+        child: Vec<Box<(Node, Vec<Box<Node>>)>>,
+        default: Vec<Box<Node>>,
         loc: Location,
     },
-    Break { loc: Location, },
-    Default { loc: Location, },
-    Continue { loc: Location, },
+    Break,
+    // Default,
+    Continue,
+    Range {
+        min: Box<Node>,
+        max: Box<Node>,
+        loc: Location,
+    },
     Import {
         package: Vec<Box<Node>>,
         module: Vec<Box<Node>>,
@@ -147,5 +168,10 @@ pub enum Node {
         real: Box<Node>,
         loc: Location,
     },
-    Void
+    FuncCall {
+        func: Box<Node>,
+        args: Vec<Box<Node>>,
+        loc: Location,
+    },
+    Void,
 }

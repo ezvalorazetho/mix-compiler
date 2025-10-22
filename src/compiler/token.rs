@@ -33,6 +33,7 @@ pub enum TokenType {
     Is,
     TypeName,
     Continue,
+    In,
     
     OpenParent,
     CloseParent,

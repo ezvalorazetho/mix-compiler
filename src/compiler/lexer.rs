@@ -220,6 +220,7 @@ impl Lexer {
             "import" => TokenType::Import,
             "use" => TokenType::Use,
             "is" => TokenType::Is,
+            "in" => TokenType::In,
             "alias" => TokenType::Alias,
             "typename" => TokenType::TypeName,
             "public" => TokenType::Public,
